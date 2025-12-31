@@ -65,12 +65,12 @@ function About() {
     {
       icon: Award,
       title: 'Expert Service',
-      description: 'Professional installation and support services',
+      description: 'At TNL Lighting, we are all about you. Our team works closely with you to understand your vision and deliver top-notch light installations that exceed expectations. We are committed to personalized service, quality products, and support every step of the way.',
     },
     {
       icon: Users,
       title: 'Customer Focus',
-      description: 'Dedicated to exceeding your expectations',
+      description: 'We deliver expert service from start to finish—professional, on‑site installations by seasoned techs and ongoing support to keep everything running smoothly. Our team handles every detail so you get reliable performance and peace of mind long after the lights are on.',
     },
   ];
 
