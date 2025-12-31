@@ -26,7 +26,7 @@ function Hero() {
         playsInline
         className="absolute inset-0 w-full h-full object-cover"
       >
-        <source src="/homer.mp4" type="video/mp4" />
+        <source src="https://res.cloudinary.com/dprt5t7y1/video/upload/v1767174968/homer_uuxdpk.mp4" type="video/mp4" />
       </video>
 
       {/* Dark gradient overlay */}
