@@ -59,8 +59,8 @@ function Contact() {
     {
       icon: Mail,
       title: 'Email',
-      content: 'info@tnllighting.com',
-      link: 'mailto:info@tnllighting.com',
+      content: 'info@tnllightingcustoms.co.za',
+      link: 'mailto:info@tnllightingcustoms.co.za',
     },
     {
       icon: MapPin,
