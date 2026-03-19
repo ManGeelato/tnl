@@ -20,7 +20,7 @@ interface CategoryCardProps {
 
 function CategoryCard({ category }: CategoryCardProps) {
   const [selectedProduct, setSelectedProduct] = useState<SubCategory | null>(null);
-  const WHATSAPP_NUMBER = '27699406286';
+  const WHATSAPP_NUMBER = '27826823933';
 
   // Prevent background scroll when modal is open
   useEffect(() => {
