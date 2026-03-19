@@ -1,5 +1,5 @@
-import { useState } from 'react';
-import { MessageCircle, X, ChevronRight } from 'lucide-react';
+import { useState, useEffect } from 'react';
+import { MessageCircle, X } from 'lucide-react';
 
 interface SubCategory {
   id: string;
@@ -22,6 +22,11 @@ function CategoryCard({ category }: CategoryCardProps) {
   const [selectedProduct, setSelectedProduct] = useState<SubCategory | null>(null);
   const WHATSAPP_NUMBER = '27699406286';
 
+  // Prevent background scroll when modal is open
+  useEffect(() => {
+    document.body.style.overflow = selectedProduct ? 'hidden' : 'auto';
+  }, [selectedProduct]);
+
   const handleEnquire = (product: SubCategory) => {
     const message = `Hi! I'm interested in enquiring about your ${product.name} from the ${category.title} category. Could you provide more details?`;
     const encodedMessage = encodeURIComponent(message);
@@ -39,36 +44,38 @@ function CategoryCard({ category }: CategoryCardProps) {
         {category.subcategories.map((subcategory) => (
           <div
             key={subcategory.id}
-            className="group"
+            className="group cursor-pointer"
+            onClick={() => setSelectedProduct(subcategory)}
           >
             <div className="bg-gray-800 rounded-lg overflow-hidden border border-gray-700 hover:border-red-500 transition-all duration-300 transform hover:-translate-y-2 h-full flex flex-col">
-              <div className="aspect-square bg-gradient-to-br from-gray-700 to-gray-800 flex items-center justify-center overflow-hidden">
+              
+              {/* Image */}
+              <div className="relative aspect-square bg-gradient-to-br from-gray-700 to-gray-800 overflow-hidden">
                 <img
                   src={subcategory.image}
                   alt={subcategory.name}
                   className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
+                  onError={(e) => (e.currentTarget.src = '/fallback.jpg')}
                 />
+                <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-all duration-300" />
               </div>
+
+              {/* Content */}
               <div className="p-4 flex flex-col flex-1">
                 <h4 className="font-semibold text-lg mb-2">{subcategory.name}</h4>
-                <p className="text-gray-400 text-sm mb-4 flex-1">{subcategory.description}</p>
-                <button
-                  onClick={() => setSelectedProduct(subcategory)}
-                  className="w-full bg-red-500 hover:bg-red-600 text-white py-2 rounded-lg text-sm font-medium transition-all duration-300 flex items-center justify-center space-x-2 group/btn"
-                >
-                  <MessageCircle size={16} />
-                  <span>Enquire</span>
-                  <ChevronRight size={16} className="group-hover/btn:translate-x-1 transition-transform duration-300" />
-                </button>
+                <p className="text-gray-400 text-sm">{subcategory.description}</p>
               </div>
             </div>
           </div>
         ))}
       </div>
 
+      {/* Modal */}
       {selectedProduct && (
         <div className="fixed inset-0 bg-black/80 flex items-center justify-center z-50 p-4 animate-fadeIn">
           <div className="bg-gray-900 rounded-lg border border-gray-700 max-w-md w-full p-8 relative">
+            
+            {/* Close button */}
             <button
               onClick={() => setSelectedProduct(null)}
               className="absolute top-4 right-4 text-gray-400 hover:text-red-500 transition-colors duration-300"
@@ -76,21 +83,28 @@ function CategoryCard({ category }: CategoryCardProps) {
               <X size={24} />
             </button>
 
+            {/* Title */}
             <h3 className="text-2xl font-bold mb-2">{selectedProduct.name}</h3>
             <div className="w-16 h-1 bg-red-500 mb-6"></div>
 
+            {/* Image + Description */}
             <div className="mb-6">
               <img
                 src={selectedProduct.image}
                 alt={selectedProduct.name}
                 className="w-full h-48 object-cover rounded-lg mb-4"
+                onError={(e) => (e.currentTarget.src = '/fallback.jpg')}
               />
               <p className="text-gray-300 mb-2">{selectedProduct.description}</p>
               <p className="text-gray-400 text-sm">
-                Category: <span className="text-red-500 font-semibold">{category.title}</span>
+                Category:{' '}
+                <span className="text-red-500 font-semibold">
+                  {category.title}
+                </span>
               </p>
             </div>
 
+            {/* WhatsApp Button */}
             <button
               onClick={() => {
                 handleEnquire(selectedProduct);
@@ -99,7 +113,7 @@ function CategoryCard({ category }: CategoryCardProps) {
               className="w-full bg-red-500 hover:bg-red-600 text-white py-3 rounded-lg font-medium transition-all duration-300 flex items-center justify-center space-x-2 transform hover:scale-105"
             >
               <MessageCircle size={20} />
-              <span>Contact on WhatsApp</span>
+              <span>Enquire on WhatsApp</span>
             </button>
           </div>
         </div>
