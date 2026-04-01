@@ -53,8 +53,8 @@ function Contact() {
     {
       icon: Phone,
       title: 'Phone',
-      content: '+1 (555) 123-4567',
-      link: 'tel:+15551234567',
+      content: '+27 (0) 82 682 3933',
+      link: 'tel:+270826823933',
     },
     {
       icon: Mail,
@@ -65,7 +65,7 @@ function Contact() {
     {
       icon: MapPin,
       title: 'Location',
-      content: '123 Lighting Street, City, Country',
+      content: '20A Eastleigh, Edenvale, Johannesburg, South Africa',
       link: '#',
     },
   ];
